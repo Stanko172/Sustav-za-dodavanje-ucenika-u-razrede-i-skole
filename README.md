@@ -1,4 +1,5 @@
 # sustav_za_dodavanje_ucenika
+-Dodati Vuex za state managament
 
 ## Project setup
 ```

@@ -1,10 +1,10 @@
 <template>
-    <h1>View student</h1>
+    <h1>View school</h1>
 </template>
 
 <script>
 export default {
-    name: 'view student',
+    name: 'view_school',
     data(){
         return{
 

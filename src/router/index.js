@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import New_student from '../views/New_student.vue'
-import View_student from '../views/View_student.vue'
+import View_school from '../views/View_school.vue'
 import Edit_student from '../views/Edit_student.vue'
 
 Vue.use(VueRouter)
@@ -19,9 +19,9 @@ Vue.use(VueRouter)
     component: New_student
   },
   {
-    path: '/view/:student_id',
-    name: 'view_student',
-    component: View_student
+    path: '/view/:school_id',
+    name: 'view_school',
+    component: View_school
   },
   {
     path: '/edit/:student_id',

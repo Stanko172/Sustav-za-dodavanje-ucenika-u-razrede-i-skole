@@ -19,6 +19,8 @@
         <tr v-for="school in schools" :key="school.id" scope="row">
           <td>{{ school.skola_id }}</td>
           <td>{{ school.naziv }}</td>
+          <!--<td><router-link :to="`/view/${school.skola_id}`">a</router-link></td>-->
+          <td><router-link :to="{name: 'view_school', params: {school_id: school.skola_id}}"><i class="fas fa-cog"></i></router-link></td>
         </tr>
       </tbody>
     </table>

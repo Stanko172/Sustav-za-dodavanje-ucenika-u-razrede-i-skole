@@ -30,7 +30,7 @@
           <td>{{ student.prezime }}</td>
           <td>{{ student.grad }}</td>
           <td>{{ student.godine }}</td>
-          <td><router-link :to="{name: 'view_student', params:{ucenik_id: student.ucenik_id}}">a</router-link></td>
+          <td><router-link :to="{name: 'view_student', params:{ucenik_id: student.ucenik_id}}"><i class="fas fa-cog"></i></router-link></td>
         </tr>
       </tbody>
     </table>

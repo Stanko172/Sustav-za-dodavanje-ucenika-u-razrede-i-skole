@@ -1,7 +1,18 @@
 <template>
     <div class="container">
-        <h1>Ucenik:</h1>
-        {{ ime }}
+        <div class="row justify-content-center m-5">
+            <div class="col-6">
+                <ul class="list-group">
+                    <li class="list-group-item active"><h4>{{ ime }} {{ prezime }}</h4></li>
+                    <li class="list-group-item">Grad: {{ grad }}</li>
+                    <li class="list-group-item">Godine: {{ godine }}</li>
+                </ul>
+                <div class="button-section d-flex justify-content-start mt-3">
+                    <button type="button" class="btn btn-info mr-4" @click="$router.go(-1)">Nazad</button>
+                    <button type="button" class="btn btn-danger" @click="deleteStudent">Izbriši</button>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -16,6 +27,8 @@ export default {
             prezime: null,
             grad: null,
             godine: null
+
+
         }
     },
     beforeRouteEnter(to, from, next){
@@ -31,6 +44,23 @@ export default {
                 })
             })
         })
-    }
+    },
+    methods:{
+        deleteStudent(){
+            if(confirm('Ovim postupkom će se izbrisati student!')){
+                const school_id = this.$route.params.school_id
+                const razred_id = this.$route.params.razred_id
+                
+                db.collection('ucenici').where('ucenik_id', '==', this.$route.params.ucenik_id).get()
+                .then(querySnapshot => {
+                    querySnapshot.forEach(doc => {
+                        doc.ref.delete()
+                    })
+                })
+
+                this.$router.push(`/${school_id}/razredi/${razred_id}/ucenici/`)
+            }
+        }
+}
 }
 </script>

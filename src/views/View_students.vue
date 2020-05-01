@@ -30,6 +30,7 @@
           <td>{{ student.prezime }}</td>
           <td>{{ student.grad }}</td>
           <td>{{ student.godine }}</td>
+          <td><router-link :to="{name: 'view_student', params:{ucenik_id: student.ucenik_id}}">a</router-link></td>
         </tr>
       </tbody>
     </table>
@@ -46,7 +47,7 @@ export default {
         }
     },
     beforeRouteEnter(to, from, next){
-        db.collection('ucenici').where('skola', '==', to.params.razred_id).get()
+        db.collection('ucenici').where('razred', '==', to.params.razred_id).get()
         .then(querySnapshot => {
             querySnapshot.forEach(doc => {
                 next(vm => {

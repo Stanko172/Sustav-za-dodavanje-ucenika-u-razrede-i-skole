@@ -7,30 +7,53 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li v-show="isLoggedIn" class="nav-item active">
                 <router-link class="nav-link" to="/">Naslovnica</router-link>
             </li>
-            <li class="nav-item">
+            <li v-show="isLoggedIn" class="nav-item">
                 <router-link class="nav-link" to="/about">Info</router-link>
             </li>
-            <li class="nav-item">
+            <li v-show="isLoggedIn" class="nav-item">
                 <router-link class="nav-link" to="/new">Novi Učenik</router-link>
             </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+            <ul class="navbar-nav ml-auto">
+            <li v-show="!isLoggedIn" class="nav-item">
+                <router-link class="nav-link" to="/login">Login</router-link>
+            </li>
+            <li v-show="!isLoggedIn" class="nav-item">
+                <router-link class="nav-link" to="/register">Register</router-link>
+            </li>
+            <li v-show="isLoggedIn" class="nav-item">
+                <button class="btn btn-danger" @click="logout">logout</button>
+            </li>
+            </ul>
         </div>
     </nav>
 </template>
 
 <script>
+import firebase from 'firebase'
 export default {
     name: 'navbar',
     data(){
         return{
-
+            isLoggedIn: false,
+            currentUser: false
+        }
+    },
+    created() {
+        if(firebase.auth().currentUser){
+            this.isLoggedIn = true
+            this.currentUser = firebase.auth().currentUser.email
+        }
+    },
+    methods: {
+        logout(){
+            firebase.auth().signOut()
+            .then(() => {
+                this.$router.push('/login')
+            })
         }
     }
 }

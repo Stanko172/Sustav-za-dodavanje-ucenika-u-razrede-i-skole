@@ -48,8 +48,6 @@ export default {
     methods:{
         deleteStudent(){
             if(confirm('Ovim postupkom će se izbrisati student!')){
-                const school_id = this.$route.params.school_id
-                const razred_id = this.$route.params.razred_id
                 
                 db.collection('ucenici').where('ucenik_id', '==', this.$route.params.ucenik_id).get()
                 .then(querySnapshot => {
@@ -58,7 +56,7 @@ export default {
                     })
                 })
 
-                this.$router.push(`/${school_id}/razredi/${razred_id}/ucenici/`)
+                this.$router.go(-1)
             }
         }
 }
